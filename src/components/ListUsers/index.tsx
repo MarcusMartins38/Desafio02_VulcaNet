@@ -35,8 +35,6 @@ const ListUsers: React.FC = () => {
           <p>icon</p>
         </DivClientes>
 
-        <h1>List Users</h1>
-
         <ConterntClientList>
           <ClienteInfo>
             <img
