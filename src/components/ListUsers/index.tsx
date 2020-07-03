@@ -8,7 +8,7 @@ import {
   DivClientes,
   ConterntClientList,
   ClienteInfo,
-} from "./style";
+} from "./styles";
 
 const ListUsers: React.FC = () => {
   return (
