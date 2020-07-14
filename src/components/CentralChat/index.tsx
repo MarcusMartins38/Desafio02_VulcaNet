@@ -2,6 +2,8 @@ import React from "react";
 
 import {
   Container,
+  ContainerFunctionArea,
+  InputArea,
   ChatContent,
   ClientMessage,
   UserInfo,
@@ -13,10 +15,20 @@ import {
 import checkedMessage from "../../assets/checkedMessage.svg";
 import uncheckedMessage from "../../assets/uncheckedMessage.svg";
 import sendingMessageGroup from "../../assets/sendingMessageGroup.svg";
+import lupa from "../../assets/lupa.svg";
 
 const CentralChat: React.FC = () => {
   return (
     <Container>
+      <ContainerFunctionArea>
+        <InputArea>
+          <input />
+          <img src={lupa} alt="lupa" />
+        </InputArea>
+        <div>
+          <button>Finalizar Atendimento</button>
+        </div>
+      </ContainerFunctionArea>
       <ChatContent>
         <ClientMessage>
           <UserInfo>
