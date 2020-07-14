@@ -8,7 +8,7 @@ export default createGlobalStyle`
   }
   html, body, #root {
     height: 100%;
-    background-color: #6adc9f;
+    background: linear-gradient(180deg, #39a0b8 0%, #2b6d7d 100%);
   }
   *, button, input {
     border: 0;

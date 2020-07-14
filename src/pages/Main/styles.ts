@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Grid = styled.div`
   display: grid;
 
-  grid-template-columns: 312px 58px auto 235px;
-  grid-template-rows: 24px 65px auto;
+  grid-template-columns: 310px 64px auto 250px;
+  grid-template-rows: 10px 65px auto;
 
   /* LU = List Users 
    BRD = Borda Superior
