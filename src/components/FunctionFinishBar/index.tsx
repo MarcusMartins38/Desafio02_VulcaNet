@@ -2,15 +2,16 @@ import React from "react";
 
 import { Container, InputArea } from "./styles";
 
+import lupa from "../../assets/lupa.svg";
+
 const FunctionFinishBar: React.FC = () => {
   return (
     <Container>
       <InputArea>
         <input />
-        <p>Icon</p>
+        <img src={lupa} alt="lupa" />
       </InputArea>
       <div>
-        <button>Transferir</button>
         <button>Finalizar Atendimento</button>
       </div>
     </Container>

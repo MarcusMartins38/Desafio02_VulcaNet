@@ -17,17 +17,13 @@ export const Container = styled.div`
       font-size: 16px;
       margin: 5px;
       padding: 8px 12px;
-      border: 1px solid gray;
-      background-color: transparent;
-      color: blue;
       cursor: pointer;
 
-      transition: background-color 0.5s, color 0.5s;
+      border: 1px solid gray;
+      background-color: #00a7cf;
 
-      &:hover {
-        background-color: blue;
-        color: white;
-      }
+      font-weight: bold;
+      color: white;
     }
   }
 `;
@@ -48,7 +44,7 @@ export const InputArea = styled.div`
     background-color: transparent;
   }
 
-  p {
-    margin-right: 5px;
+  img {
+    margin-right: 8px;
   }
 `;

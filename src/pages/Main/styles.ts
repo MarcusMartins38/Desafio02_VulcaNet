@@ -11,13 +11,13 @@ export const Grid = styled.div`
    BRD = Borda Superior
    ILU = Icons List Util
    FFB = Function Finish Bar
-   CRT = Centro
+   CC = Central Chat
    UI = User Info*/
 
   grid-template-areas:
     "LU BRD BRD BRD"
     "LU ILU FFB UI"
-    "LU ILU CRT UI";
+    "LU ILU CC UI";
 
   height: 100vh;
 `;

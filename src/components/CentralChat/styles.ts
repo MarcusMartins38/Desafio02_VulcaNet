@@ -1,0 +1,102 @@
+import styled from "styled-components";
+
+export const Container = styled.div`
+  grid-area: CC;
+
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const ChatContent = styled.div`
+  overflow-y: scroll;
+  height: 100%;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const ClientMessage = styled.div`
+  margin: 16px 6px 8px 20px;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+
+  #perfil_image {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  p {
+    margin: 0 6px;
+    color: #636466;
+    font-size: 16px;
+  }
+
+  #visto_image {
+    width: 16px;
+    height: 16px;
+
+    margin: 0 6px;
+  }
+`;
+
+export const TextDiv = styled.div`
+  width: 600px;
+
+  background-color: white;
+  margin-top: 28px;
+
+  font-family: Lato;
+  font-size: 15px;
+  color: #333333;
+  line-height: 24px;
+
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 10px 10px 10px;
+
+  p {
+    max-width: 560px;
+    padding: 20px 0px 20px 20px;
+  }
+`;
+
+export const UserMessage = styled.div`
+  margin: 26px 16px 8px 6px;
+
+  display: flex;
+  justify-content: space-between;
+
+  #user_info {
+    margin-left: 280px;
+  }
+
+  #user_message {
+    background-color: #aeffd4;
+  }
+`;
+
+export const SendMessageDiv = styled.div`
+  color: white;
+  height: 64px;
+  padding: 13px 14px;
+
+  background-color: white;
+
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    padding: 0 8px;
+  }
+`;

@@ -9,7 +9,7 @@ export const Container = styled.div`
 
   border-radius: 15px 0 0 0;
 
-  background-color: white;
+  background-color: #f8fafc;
 
   button {
     padding: 16px 0;
