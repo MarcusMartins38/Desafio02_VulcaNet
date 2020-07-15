@@ -11,7 +11,13 @@ export const Container = styled.div`
 
   background-color: #f8fafc;
 
-  button {
+  a {
+    display: flex;
+    justify-content: center;
+  }
+
+  button,
+  a {
     padding: 16px 0;
     width: 100%;
     background-color: transparent;

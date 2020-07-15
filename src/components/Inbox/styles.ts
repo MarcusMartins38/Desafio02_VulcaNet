@@ -73,6 +73,14 @@ export const EmailsContent = styled.div`
     display: none;
   }
 
+  a {
+    padding: 2% 8% 2% 2%;
+    background-color: #f8fafc;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
   table {
     width: 98%;
     margin: 0 auto;
@@ -89,6 +97,11 @@ export const EmailsContent = styled.div`
     }
 
     tbody {
+      width: 100%;
+
+      a {
+        min-width: 100%;
+      }
       tr {
         background: #f8fafc;
         border: 1px solid #e5e5e5;

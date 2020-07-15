@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -63,37 +64,17 @@ const Inbox: React.FC = () => {
 
           <tbody>
             <tr>
-              <td>Suspensão Freelander 2</td>
-              <td>01/10/2019</td>
-              <td>22/10/2019</td>
-            </tr>
-            <tr>
               <td>Centro comercial Moctezuma</td>
               <td>Francisco Chang</td>
               <td>Mexico</td>
             </tr>
-            <tr>
-              <td>Ernst Handel</td>
-              <td>Roland Mendel</td>
-              <td>Austria</td>
-            </tr>
-            <tr>
-              <td>Island Trading</td>
-              <td>Helen Bennett</td>
-              <td>UK</td>
-            </tr>
-            <tr>
-              <td>Laughing Bacchus Winecellars</td>
-              <td>Yoshi Tannamuri</td>
-              <td>Canada</td>
-            </tr>
-            <tr>
-              <td>Magazzini Alimentari Riuniti</td>
-              <td>Giovanni Rovelli</td>
-              <td>Italy</td>
-            </tr>
           </tbody>
         </table>
+        <Link to="">
+          <p>Suspensão Freelander 2</p>
+          <p>20/10/2000</p>
+          <p>10/05/2500</p>
+        </Link>
       </EmailsContent>
     </Container>
   );
