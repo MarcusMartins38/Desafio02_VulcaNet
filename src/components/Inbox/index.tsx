@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Container,
@@ -8,8 +8,37 @@ import {
 } from "./styles";
 
 import lupa from "../../assets/lupa.svg";
+import api from "../../services/api";
+
+interface ChatProps {
+  id: number;
+  customer: number;
+  channel: number;
+  subject: string | null;
+  start: number;
+  messages: MessageProps[];
+}
+
+interface MessageProps {
+  seen: boolean;
+  timestamp: string;
+  body: string;
+  type: string;
+}
+
+interface UserProps {
+  name: string;
+  company: string;
+  photo: string;
+}
 
 const Inbox: React.FC = () => {
+  const [chatData, setChatData] = useState<ChatProps>({} as ChatProps);
+  const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
+
+  useEffect(() => {
+    api.get("/chats").then((response) => {});
+  }, []);
   return (
     <Container>
       <ContainerFunctionArea>
