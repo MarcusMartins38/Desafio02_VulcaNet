@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import {
   Container,
@@ -17,7 +17,62 @@ import uncheckedMessage from "../../assets/uncheckedMessage.svg";
 import sendingMessageGroup from "../../assets/sendingMessageGroup.svg";
 import lupa from "../../assets/lupa.svg";
 
+import { ClientData } from "../../components/ClientInfo";
+
+import { format } from "date-fns";
+import api from "../../services/api";
+
+interface ChatProps {
+  id: number;
+  customer: number;
+  channel: number;
+  subject: string | null;
+  start: number;
+  messages: MessageProps[];
+}
+
+interface MessageProps {
+  seen: boolean;
+  timestamp: string;
+  body: string;
+  type: string;
+}
+
+interface UserProps {
+  name: string;
+  company: string;
+  photo: string;
+}
+
 const CentralChat: React.FC = () => {
+  const [chatData, setChatData] = useState<ChatProps>({} as ChatProps);
+  const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
+  const [userData, setUserData] = useState<UserProps>({} as UserProps);
+
+  useEffect(() => {
+    api.get("/user").then((response) => {
+      setUserData(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get("/customers").then((response) => {
+      setClientInfo(response.data[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get("/chats").then((response) => {
+      setChatData(response.data[0]);
+    });
+  }, []);
+
+  const formatDate = useCallback((timeStamp) => {
+    const date = new Date(timeStamp * 1000);
+    const formattedDate = format(date, "dd/MM/yyyy HH:mm");
+    return formattedDate;
+  }, []);
+
   return (
     <Container>
       <ContainerFunctionArea>
@@ -29,94 +84,103 @@ const CentralChat: React.FC = () => {
           <button>Finalizar Atendimento</button>
         </div>
       </ContainerFunctionArea>
+
       <ChatContent>
-        <ClientMessage>
-          <UserInfo>
-            <img
-              id="perfil_image"
-              alt="Perfil"
-              src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-            />
-            <p>
-              <strong>João da Silva</strong> - 07/10/2019 14h10
-            </p>
-            <img id="visto_image" src={checkedMessage} alt="checkedMessage" />
-          </UserInfo>
-          <TextDiv>
-            <p>
-              Quisque enim purus, hendrerit et volutpat viverra, faucibus non
-              neque. Suspendisse quis arcu lacus. Sed tincidunt dui at leo
-              laoreet, vel suscipit mauris dignissim. Phasellus ullamcorper orci
-              ac lorem ultrices, ac fringilla nisi bibendum. Integer quis
-              aliquam massa, vitae condimentum lorem. Suspendisse scelerisque
-              cursus nisl non pulvinar. Donec at varius nulla. Praesent
-              volutpat, nibh ac volutpat pharetra, sapien sapien scelerisque
-              sapien, id vehicula nibh elit in velit.
-            </p>
-          </TextDiv>
-        </ClientMessage>
+        {chatData && (
+          <>
+            {chatData.messages !== undefined ? (
+              chatData.messages.map((message) => {
+                if (message.type === "incoming") {
+                  return (
+                    <ClientMessage key={message.timestamp}>
+                      <UserInfo>
+                        <img
+                          id="perfil_image"
+                          alt="Perfil"
+                          src={clientInfo.photo}
+                        />
+                        <p>
+                          <strong>{clientInfo.name}</strong> -{" "}
+                          {formatDate(message.timestamp)}
+                        </p>
+                        <img
+                          id="visto_image"
+                          src={
+                            message.seen === true
+                              ? checkedMessage
+                              : uncheckedMessage
+                          }
+                          alt="checkedMessage"
+                        />
+                      </UserInfo>
+                      <TextDiv>
+                        <p>
+                          Quisque enim purus, hendrerit et volutpat viverra,
+                          faucibus non neque. Suspendisse quis arcu lacus. Sed
+                          tincidunt dui at leo laoreet, vel suscipit mauris
+                          dignissim. Phasellus ullamcorper orci ac lorem
+                          ultrices, ac fringilla nisi bibendum. Integer quis
+                          aliquam massa, vitae condimentum lorem. Suspendisse
+                          scelerisque cursus nisl non pulvinar. Donec at varius
+                          nulla. Praesent volutpat, nibh ac volutpat pharetra,
+                          sapien sapien scelerisque sapien, id vehicula nibh
+                          elit in velit.
+                        </p>
+                      </TextDiv>
+                    </ClientMessage>
+                  );
+                } else {
+                  return (
+                    <UserMessage key={message.timestamp}>
+                      <div></div>
 
-        <UserMessage>
-          <div></div>
+                      <div>
+                        <UserInfo id="user_info">
+                          <img
+                            id="visto_image"
+                            src={
+                              message.seen === true
+                                ? checkedMessage
+                                : uncheckedMessage
+                            }
+                            alt="checkedMessage"
+                          />
 
-          <div>
-            <UserInfo id="user_info">
-              <img id="visto_image" src={checkedMessage} alt="checkedMessage" />
+                          <p>
+                            <strong>{userData.name}</strong> -{" "}
+                            {formatDate(message.timestamp)}
+                          </p>
 
-              <p>
-                <strong>João da Silva</strong> - 07/10/2019 14h10
-              </p>
-
-              <img
-                id="perfil_image"
-                alt="Perfil"
-                src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-              />
-            </UserInfo>
-            <TextDiv id="user_message">
-              <p>
-                Quisque enim purus, hendrerit et volutpat viverra, faucibus non
-                neque. Suspendisse quis arcu lacus. Sed tincidunt dui at leo
-                laoreet, vel suscipit mauris dignissim. Phasellus ullamcorper
-                orci ac lorem ultrices, ac fringilla nisi bibendum. Integer quis
-                aliquam massa, vitae condimentum lorem. Suspendisse scelerisque
-                cursus nisl non pulvinar. Donec at varius nulla. Praesent
-                volutpat, nibh ac volutpat pharetra, sapien sapien scelerisque
-                sapien, id vehicula nibh elit in velit.
-              </p>
-            </TextDiv>
-          </div>
-        </UserMessage>
-
-        <ClientMessage>
-          <UserInfo>
-            <img
-              id="perfil_image"
-              alt="Perfil"
-              src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-            />
-            <p>
-              <strong>João da Silva</strong> - 07/10/2019 14h10
-            </p>
-            <img
-              id="visto_image"
-              src={uncheckedMessage}
-              alt="uncheckedMessage"
-            />
-          </UserInfo>
-          <TextDiv>
-            <p>
-              Quisque enim purus, hendrerit et volutpat viverra, faucibus non
-              neque. Suspendisse quis arcu lacus. Sed tincidunt dui at leo
-              laoreet, vel suscipit mauris dignissim. Phasellus ullamcorper orci
-              ac lorem ultrices, ac fringilla nisi bibendum. Integer quis
-              aliquam massa, vitae condimentum lorem. Suspendisse scelerisque
-              cursus nisl non pulvinar. Donec at varius nulla. Praesent
-              volutpat, nibh ac volutpat pharetra, sapien sapien scelerisque
-              sapien, id vehicula nibh elit in velit.
-            </p>
-          </TextDiv>
-        </ClientMessage>
+                          <img
+                            id="perfil_image"
+                            alt="Perfil"
+                            src={userData.photo}
+                          />
+                        </UserInfo>
+                        <TextDiv id="user_message">
+                          <p>
+                            Quisque enim purus, hendrerit et volutpat viverra,
+                            faucibus non neque. Suspendisse quis arcu lacus. Sed
+                            tincidunt dui at leo laoreet, vel suscipit mauris
+                            dignissim. Phasellus ullamcorper orci ac lorem
+                            ultrices, ac fringilla nisi bibendum. Integer quis
+                            aliquam massa, vitae condimentum lorem. Suspendisse
+                            scelerisque cursus nisl non pulvinar. Donec at
+                            varius nulla. Praesent volutpat, nibh ac volutpat
+                            pharetra, sapien sapien scelerisque sapien, id
+                            vehicula nibh elit in velit.
+                          </p>
+                        </TextDiv>
+                      </div>
+                    </UserMessage>
+                  );
+                }
+              })
+            ) : (
+              <p></p>
+            )}
+          </>
+        )}
       </ChatContent>
 
       <SendMessageDiv>

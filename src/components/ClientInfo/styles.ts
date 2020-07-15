@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  grid-area: UI;
+  grid-area: CI;
 
   background-color: white;
 
@@ -17,7 +17,7 @@ export const Content = styled.div`
   width: 90%;
 
   strong {
-    color: blue;
+    color: #79accd;
   }
 
   div {
@@ -40,15 +40,15 @@ export const UserContent = styled.div`
     margin-left: 8px;
 
     strong {
-      font-size: 14px;
+      font-size: 16px;
       color: black;
     }
 
     p {
       text-transform: uppercase;
       font-weight: bold;
-      font-size: 10px;
-      color: blue;
+      font-size: 14px;
+      color: #79accd;
     }
   }
 `;
@@ -62,6 +62,7 @@ export const DivWriteDelete = styled.div`
     padding: 4px 0;
     background-color: transparent;
     border: 1px solid gray;
+    cursor: pointer;
   }
 `;
 

@@ -31,29 +31,30 @@ export const UserContent = styled.div`
 
   img {
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
   }
 
   div {
     margin-left: 8px;
 
     strong {
-      font-size: 14px;
+      font-size: 16px;
     }
     p {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;
 
 export const InputArea = styled.div`
   width: 100%;
-  background-color: #444444;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
   height: 28px;
   margin-bottom: 8px;
 
@@ -63,7 +64,7 @@ export const InputArea = styled.div`
     background-color: transparent;
   }
 
-  p {
+  img {
     margin-right: 5px;
   }
 `;
@@ -86,14 +87,13 @@ export const ConterntClientList = styled.div`
 export const ClienteInfo = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-bottom: 16px;
 
   img {
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
   }
 
   div {

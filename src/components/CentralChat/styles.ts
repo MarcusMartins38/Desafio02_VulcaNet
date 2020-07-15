@@ -2,20 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   grid-area: CC;
+  max-height: 100%;
 
   background-color: #e5e5e5;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
-export const ChatContent = styled.div`
-  overflow-y: scroll;
-  height: 100%;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const ContainerFunctionArea = styled.div`
@@ -43,6 +35,17 @@ export const ContainerFunctionArea = styled.div`
       font-weight: bold;
       color: white;
     }
+  }
+`;
+
+export const ChatContent = styled.div`
+  max-height: 88vh;
+  height: 100%;
+
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 

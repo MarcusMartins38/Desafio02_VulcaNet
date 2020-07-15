@@ -4,7 +4,7 @@ import { Grid } from "./styles";
 
 import ListUsers from "../../components/ListUsers";
 import IconsListUtil from "../../components/IconsListUtil";
-import UserInfo from "../../components/UserInfo";
+import ClientInfo from "../../components/ClientInfo";
 import CentralChat from "../../components/CentralChat";
 import Inbox from "../../components/Inbox";
 
@@ -32,7 +32,7 @@ const Main: React.FC = () => {
         handleButtonWpp={handleButtonWpp}
       />
       {emailButtonClicked === false ? <CentralChat /> : <Inbox />}
-      <UserInfo />
+      <ClientInfo />
     </Grid>
   );
 };
