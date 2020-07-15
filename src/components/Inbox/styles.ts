@@ -67,7 +67,9 @@ export const InputArea = styled.div`
 export const EmailsContent = styled.div`
   overflow-y: scroll;
   height: 100%;
-  width: 100%;
+  width: 97%;
+
+  margin: 0 auto;
 
   ::-webkit-scrollbar {
     display: none;
@@ -78,45 +80,47 @@ export const EmailsContent = styled.div`
     background-color: #f8fafc;
 
     display: flex;
-    justify-content: space-between;
-  }
 
-  table {
-    width: 98%;
-    margin: 0 auto;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 8px;
 
-    thead {
-      background-color: #e5e5e5;
-      border: 0;
+    transition: font-weight 0.5s, padding 0.5s;
 
-      th {
-        text-align: left;
-        color: #79accd;
-        padding: 18px 0;
-      }
+    &:hover {
+      font-weight: bold;
+      padding: 3% 8% 3% 2%;
     }
 
-    tbody {
-      width: 100%;
-
-      a {
-        min-width: 100%;
+    p {
+      &:nth-child(1) {
+        width: 50%;
       }
-      tr {
-        background: #f8fafc;
-        border: 1px solid #e5e5e5;
-        border-radius: 5px;
-
-        &:hover {
-          background-color: white;
-          font-weight: bold;
-        }
-
-        td {
-          text-align: left;
-          padding: 18px 5px;
-        }
+      &:nth-child(2) {
+        width: 20%;
+        margin-left: 2%;
       }
+      &:nth-child(3) {
+        margin-left: 5%;
+      }
+    }
+  }
+`;
+
+export const HeadTable = styled.div`
+  display: flex;
+
+  font-size: 12px;
+  color: #79accd;
+  padding: 18px 0;
+
+  h2 {
+    margin-left: 2%;
+    &:nth-child(1) {
+      width: 45%;
+    }
+    &:nth-child(2) {
+      width: 20%;
     }
   }
 `;

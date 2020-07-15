@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 import {
   Container,
   ContainerFunctionArea,
   InputArea,
   EmailsContent,
+  HeadTable,
 } from "./styles";
 
 import lupa from "../../assets/lupa.svg";
@@ -34,12 +36,27 @@ interface UserProps {
 }
 
 const Inbox: React.FC = () => {
-  const [chatData, setChatData] = useState<ChatProps>({} as ChatProps);
+  const [chatData, setChatData] = useState<ChatProps[]>();
   const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
 
   useEffect(() => {
-    api.get("/chats").then((response) => {});
+    api
+      .get("/chats", {
+        params: {
+          channel: 2,
+        },
+      })
+      .then((response) => {
+        setChatData(response.data);
+      });
   }, []);
+
+  const formatDate = useCallback((timeStamp) => {
+    const date = new Date(timeStamp * 1000);
+    const formattedDate = format(date, "dd/MM/yyyy");
+    return formattedDate;
+  }, []);
+
   return (
     <Container>
       <ContainerFunctionArea>
@@ -53,28 +70,19 @@ const Inbox: React.FC = () => {
         </div>
       </ContainerFunctionArea>
       <EmailsContent>
-        <table>
-          <thead>
-            <tr>
-              <th>Assunto</th>
-              <th>Inicio</th>
-              <th>Ultima Mensagem</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-            </tr>
-          </tbody>
-        </table>
-        <Link to="">
-          <p>Suspensão Freelander 2</p>
-          <p>20/10/2000</p>
-          <p>10/05/2500</p>
-        </Link>
+        <HeadTable>
+          <h2>Assunto</h2>
+          <h2>Inicio</h2>
+          <h2>Ultima Mensagem</h2>
+        </HeadTable>
+        {chatData &&
+          chatData.map((chat) => (
+            <Link key={chat.id} to={`/inboxchat:${chat.id}`}>
+              <p>{chat.subject}</p>
+              <p>{formatDate(chat.start)}</p>
+              <p>{formatDate(1594388082)}</p>
+            </Link>
+          ))}
       </EmailsContent>
     </Container>
   );
