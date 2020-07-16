@@ -23,7 +23,7 @@ $ npm install
 $ npm start
 ```
 ### Aviso
-Login: carloscorrea
+Login: carloscorrea </br>
 Senha: carloscorrea
 
 (Não foi realizada nenhuma segurança de autenticação, visto que não há Token, porem, fiz uma pequena comparação de Login e senha inseridos no input, com o disponibilizado pela api)
