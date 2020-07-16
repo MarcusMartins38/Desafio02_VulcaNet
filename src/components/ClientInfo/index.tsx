@@ -106,6 +106,15 @@ const ClientInfo: React.FC = () => {
                   );
                 }
 
+                if (item.channel === 2) {
+                  return (
+                    <div key={item.finishedAt}>
+                      <AiOutlineMail size={30} color="gray" />
+                      <p>{formatDate(item.finishedAt)}</p>
+                    </div>
+                  );
+                }
+
                 if (item.channel === 4) {
                   return (
                     <div key={item.finishedAt}>
