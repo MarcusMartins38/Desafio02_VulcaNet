@@ -33,6 +33,7 @@ export const Container = styled.div`
   #calendar {
     color: #01baef;
     &:hover {
+      border-radius: 15px 0 0 0;
       background-color: #01baef;
       svg {
         color: white;

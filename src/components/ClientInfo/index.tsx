@@ -9,12 +9,13 @@ import {
   Content,
   UserContent,
   DivWriteDelete,
-  DivUltimasConversas,
-  DivObservacao,
-  DivContatos,
+  DivLastConversations,
+  DivObservation,
+  DivContacts,
 } from "./styles";
 
 import api from "../../services/api";
+import { useParams } from "react-router-dom";
 
 export interface ClientData {
   id: number;
@@ -39,11 +40,25 @@ interface ContactsProps {
 const ClientInfo: React.FC = () => {
   const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
 
+  var { id } = useParams();
+
   useEffect(() => {
-    api.get("/customers").then((response) => {
-      setClientInfo(response.data[0]);
-    });
-  }, []);
+    const url = window.location.href;
+
+    if (id === null || id === undefined || url.includes("inboxchat")) {
+      id = 1;
+    }
+
+    api
+      .get("/customers", {
+        params: {
+          id,
+        },
+      })
+      .then((response) => {
+        setClientInfo(response.data[0]);
+      });
+  }, [id]);
 
   const formatDate = useCallback((timeStamp) => {
     const currentDate = new Date(Date.now());
@@ -78,13 +93,13 @@ const ClientInfo: React.FC = () => {
             </button>
           </DivWriteDelete>
 
-          <DivUltimasConversas>
+          <DivLastConversations>
             <strong>Ultimas Conversas</strong>
             {clientInfo.lastConversations !== undefined ? (
               clientInfo.lastConversations.map((item) => {
                 if (item.channel === 1) {
                   return (
-                    <div>
+                    <div key={item.finishedAt}>
                       <FaWhatsapp size={20} color="gray" />
                       <p>{formatDate(item.finishedAt)}</p>
                     </div>
@@ -93,7 +108,7 @@ const ClientInfo: React.FC = () => {
 
                 if (item.channel === 4) {
                   return (
-                    <div>
+                    <div key={item.finishedAt}>
                       <AiOutlineSkype size={20} color="gray" />
                       <p>{formatDate(item.finishedAt)}</p>
                     </div>
@@ -101,55 +116,55 @@ const ClientInfo: React.FC = () => {
                 }
               })
             ) : (
-              <p></p>
+              <p>loading...</p>
             )}
-          </DivUltimasConversas>
+          </DivLastConversations>
 
-          <DivObservacao>
+          <DivObservation>
             <strong>Observações</strong>
             <p>{clientInfo.observations}</p>
-          </DivObservacao>
+          </DivObservation>
 
           {clientInfo.contacts !== undefined ? (
             clientInfo.contacts.map((item) => {
               if (item.channel === 1) {
                 return (
-                  <DivContatos>
+                  <DivContacts key={item.value}>
                     <FaWhatsapp size={30} color="gray" />
                     <div>
                       <strong>whats</strong>
                       <p>{item.value}</p>
                     </div>
-                  </DivContatos>
+                  </DivContacts>
                 );
               }
 
               if (item.channel === 2) {
                 return (
-                  <DivContatos>
+                  <DivContacts key={item.value}>
                     <AiOutlineMail size={30} color="gray" />
                     <div>
                       <strong>whats</strong>
                       <p>{item.value}</p>
                     </div>
-                  </DivContatos>
+                  </DivContacts>
                 );
               }
 
               if (item.channel === 4) {
                 return (
-                  <DivContatos>
+                  <DivContacts key={item.value}>
                     <AiOutlineSkype size={30} color="gray" />
                     <div>
                       <strong>whats</strong>
                       <p>{item.value}</p>
                     </div>
-                  </DivContatos>
+                  </DivContacts>
                 );
               }
             })
           ) : (
-            <p></p>
+            <p>loading...</p>
           )}
         </Content>
       )}

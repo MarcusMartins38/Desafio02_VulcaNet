@@ -74,7 +74,7 @@ export const DivClientes = styled.div`
   justify-content: space-between;
 `;
 
-export const ConterntClientList = styled.div`
+export const ContentClientList = styled.div`
   height: 100%;
   width: 100%;
   overflow-y: scroll;
@@ -89,6 +89,15 @@ export const ClienteInfo = styled.div`
   align-items: center;
   margin-top: 16px;
   margin-bottom: 16px;
+
+  cursor: pointer;
+
+  transition: background-color 0.5s, padding 0.5s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 6px 0;
+  }
 
   img {
     border-radius: 50%;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -29,15 +29,8 @@ interface MessageProps {
   type: string;
 }
 
-interface UserProps {
-  name: string;
-  company: string;
-  photo: string;
-}
-
 const Inbox: React.FC = () => {
   const [chatData, setChatData] = useState<ChatProps[]>();
-  const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
 
   useEffect(() => {
     api
@@ -77,7 +70,7 @@ const Inbox: React.FC = () => {
         </HeadTable>
         {chatData &&
           chatData.map((chat) => (
-            <Link key={chat.id} to={`/inboxchat:${chat.id}`}>
+            <Link key={chat.id} to={`/inboxchat/${chat.id}`}>
               <p>{chat.subject}</p>
               <p>{formatDate(chat.start)}</p>
               <p>{formatDate(1594388082)}</p>

@@ -65,12 +65,10 @@ const CentralChat: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const formatId = id.slice(1);
-
     api
       .get("/chats", {
         params: {
-          id: formatId,
+          id,
         },
       })
       .then((response) => {
@@ -188,7 +186,7 @@ const CentralChat: React.FC = () => {
                 }
               })
             ) : (
-              <p>undefined message</p>
+              <p>loading...</p>
             )}
           </>
         )}

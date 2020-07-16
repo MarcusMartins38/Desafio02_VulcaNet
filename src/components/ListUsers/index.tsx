@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import {
   Container,
@@ -6,7 +6,7 @@ import {
   UserContent,
   InputArea,
   DivClientes,
-  ConterntClientList,
+  ContentClientList,
   ClienteInfo,
 } from "./styles";
 
@@ -14,6 +14,7 @@ import plusIcon from "../../assets/plusIcon.svg";
 import lupa from "../../assets/lupa.svg";
 
 import api from "../../services/api";
+import { useHistory } from "react-router-dom";
 
 interface UserProps {
   name: string;
@@ -21,14 +22,37 @@ interface UserProps {
   photo: string;
 }
 
+interface ClientProps {
+  id: number;
+  name: string;
+  photo: string;
+  company: string;
+}
+
 const ListUsers: React.FC = () => {
   const [userData, setUserData] = useState<UserProps>({} as UserProps);
+  const [clienteData, setClienteData] = useState<ClientProps[]>([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     api.get("/user").then((response) => {
       setUserData(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    api.get("/customers").then((response) => {
+      setClienteData(response.data);
+    });
+  }, []);
+
+  const handleClick = useCallback(
+    (id) => {
+      history.push(`/wppchat/${id}`);
+    },
+    [history]
+  );
 
   return (
     <Container>
@@ -51,40 +75,17 @@ const ListUsers: React.FC = () => {
           <img src={plusIcon} alt="plusIcon" />
         </DivClientes>
 
-        <ConterntClientList>
-          <ClienteInfo>
-            <img
-              alt="Perfil"
-              src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-            />
-            <div>
-              <strong>Cliente</strong>
-              <p>Legenda</p>
-            </div>
-          </ClienteInfo>
-
-          <ClienteInfo>
-            <img
-              alt="Perfil"
-              src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-            />
-            <div>
-              <strong>Cliente</strong>
-              <p>Legenda</p>
-            </div>
-          </ClienteInfo>
-
-          <ClienteInfo>
-            <img
-              alt="Perfil"
-              src="https://avatars3.githubusercontent.com/u/57776263?s=460&u=288a03e3830a5fb19dfe83a0f8f9f9abf48cfaac&v=4"
-            />
-            <div>
-              <strong>Cliente</strong>
-              <p>Legenda</p>
-            </div>
-          </ClienteInfo>
-        </ConterntClientList>
+        <ContentClientList>
+          {clienteData.map((client) => (
+            <ClienteInfo key={client.id} onClick={() => handleClick(client.id)}>
+              <img alt="Perfil" src={client.photo} />
+              <div>
+                <strong>{client.name}</strong>
+                <p>{client.company}</p>
+              </div>
+            </ClienteInfo>
+          ))}
+        </ContentClientList>
       </Content>
     </Container>
   );

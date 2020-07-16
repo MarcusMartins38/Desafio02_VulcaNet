@@ -21,6 +21,7 @@ import { ClientData } from "../../components/ClientInfo";
 
 import { format } from "date-fns";
 import api from "../../services/api";
+import { useParams } from "react-router-dom";
 
 interface ChatProps {
   id: number;
@@ -49,6 +50,8 @@ const CentralChat: React.FC = () => {
   const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
   const [userData, setUserData] = useState<UserProps>({} as UserProps);
 
+  const { id } = useParams();
+
   useEffect(() => {
     api.get("/user").then((response) => {
       setUserData(response.data);
@@ -56,16 +59,27 @@ const CentralChat: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    api.get("/customers").then((response) => {
-      setClientInfo(response.data[0]);
-    });
-  }, []);
+    api
+      .get("/customers", {
+        params: { id },
+      })
+      .then((response) => {
+        setClientInfo(response.data[0]);
+      });
+  }, [id]);
 
   useEffect(() => {
-    api.get("/chats").then((response) => {
-      setChatData(response.data[0]);
-    });
-  }, []);
+    api
+      .get("/chats", {
+        params: {
+          customer: clientInfo.id,
+          channel: 1,
+        },
+      })
+      .then((response) => {
+        setChatData(response.data[0]);
+      });
+  }, [clientInfo.id]);
 
   const formatDate = useCallback((timeStamp) => {
     const date = new Date(timeStamp * 1000);
@@ -177,7 +191,7 @@ const CentralChat: React.FC = () => {
                 }
               })
             ) : (
-              <p></p>
+              <p>Loading ...</p>
             )}
           </>
         )}

@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React from "react";
+import { NavLink, useParams } from "react-router-dom";
 
 import { FiPhoneCall } from "react-icons/fi";
 import { FaWhatsapp, FaRegCalendarAlt, FaRocketchat } from "react-icons/fa";
@@ -7,18 +7,38 @@ import { AiOutlineSkype, AiOutlineMail } from "react-icons/ai";
 
 import { Container } from "./styles";
 
-const IconsListUtil: React.FC = ({}) => {
+const IconsListUtil: React.FC = () => {
+  const { id } = useParams();
+
   return (
     <Container>
       <button id="calendar">
         <FaRegCalendarAlt size={30} />
       </button>
-      <Link id="wpp" to="/wppchat">
+      <NavLink
+        id="wpp"
+        to={`/wppchat/1`}
+        isActive={(match, location) => location.pathname.includes("wppchat")}
+        activeStyle={{
+          backgroundColor: "green",
+          color: "white",
+        }}
+      >
         <FaWhatsapp size={30} />
-      </Link>
-      <Link id="email" to="/inbox">
+      </NavLink>
+
+      <NavLink
+        id="email"
+        to="/inbox"
+        isActive={(match, location) => location.pathname.includes("inbox")}
+        activeStyle={{
+          backgroundColor: "red",
+          color: "white",
+        }}
+      >
         <AiOutlineMail size={30} />
-      </Link>
+      </NavLink>
+
       <button id="skype">
         <AiOutlineSkype size={30} />
       </button>

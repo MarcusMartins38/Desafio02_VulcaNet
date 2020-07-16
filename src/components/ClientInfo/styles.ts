@@ -66,7 +66,7 @@ export const DivWriteDelete = styled.div`
   }
 `;
 
-export const DivUltimasConversas = styled.div`
+export const DivLastConversations = styled.div`
   strong {
     text-transform: uppercase;
     font-size: 13px;
@@ -81,7 +81,7 @@ export const DivUltimasConversas = styled.div`
   }
 `;
 
-export const DivObservacao = styled.div`
+export const DivObservation = styled.div`
   strong {
     text-transform: uppercase;
     font-size: 13px;
@@ -92,7 +92,7 @@ export const DivObservacao = styled.div`
   }
 `;
 
-export const DivContatos = styled.div`
+export const DivContacts = styled.div`
   display: flex;
   margin: 8px 0;
 
