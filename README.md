@@ -23,7 +23,11 @@ $ npm install
 $ npm start
 ```
 ### Aviso
-Login: carloscorrea </br>
+Login: carloscorrea
+
 Senha: carloscorrea
 
-(Não foi realizada nenhuma segurança de autenticação, visto que não há Token, porem, fiz uma pequena comparação de Login e senha inseridos no input, com o disponibilizado pela api)
+(Não foi realizada nenhuma segurança de autenticação, visto que não há Token, porem, fiz uma pequena comparação de Login e senha inseridos no input, com o disponibilizado pela api).
+</br>
+
+Os nomes, na lista de clientes, são clicaveis, e renderizarão as mensagens no chat whatsapp e as informações deles na lateral.
