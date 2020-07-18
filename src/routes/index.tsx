@@ -10,7 +10,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Route component={SignIn} exact path="/" />
-      <Route component={Main} path="/wppchat/:id" />
+      <Route component={Main} path="/wppchat/:channel/:id" />
       <Route component={InboxPage} path="/inbox" />
       <Route component={InboxChat} path="/inboxchat/:id" />
     </BrowserRouter>

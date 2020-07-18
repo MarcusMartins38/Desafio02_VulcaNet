@@ -49,7 +49,7 @@ const ListUsers: React.FC = () => {
 
   const handleClick = useCallback(
     (id) => {
-      history.push(`/wppchat/${id}`);
+      history.push(`/wppchat/1/${id}`);
     },
     [history]
   );

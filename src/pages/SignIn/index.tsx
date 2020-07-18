@@ -30,7 +30,7 @@ const SignIn: React.FC = () => {
       const { user, password } = response.data;
 
       if (user === formLogin && password === formPassword) {
-        history.push("/wppchat/1");
+        history.push("/wppchat/1/1");
       } else {
         console.log("Login/Password it's wrong");
       }
