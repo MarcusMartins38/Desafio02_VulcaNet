@@ -70,7 +70,7 @@ const Inbox: React.FC = () => {
         </HeadTable>
         {chatData &&
           chatData.map((chat) => (
-            <Link key={chat.id} to={`/inboxchat/${chat.id}`}>
+            <Link key={chat.id} to={`/inboxchat/2/${chat.id}`}>
               <p>{chat.subject}</p>
               <p>{formatDate(chat.start)}</p>
               <p>{formatDate(1594388082)}</p>

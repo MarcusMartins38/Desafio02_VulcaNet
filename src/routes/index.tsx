@@ -4,15 +4,14 @@ import { Route, BrowserRouter } from "react-router-dom";
 import SignIn from "../pages/SignIn";
 import Main from "../pages/Main";
 import InboxPage from "../pages/InboxPage";
-import InboxChat from "../pages/InboxChat";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Route component={SignIn} exact path="/" />
       <Route component={Main} path="/wppchat/:channel/:id" />
+      <Route component={Main} path="/inboxchat/:channel/:id" />
       <Route component={InboxPage} path="/inbox" />
-      <Route component={InboxChat} path="/inboxchat/:id" />
     </BrowserRouter>
   );
 };

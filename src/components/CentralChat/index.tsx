@@ -59,27 +59,36 @@ const CentralChat: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    api
-      .get("/customers", {
-        params: { id },
-      })
-      .then((response) => {
-        setClientInfo(response.data[0]);
-      });
-  }, [id]);
+    async function getChats() {
+      await api
+        .get("/chats", {
+          params: {
+            id,
+            channel,
+          },
+        })
+        .then((response) => {
+          setChatData(response.data[0]);
+        });
+    }
 
-  useEffect(() => {
-    api
-      .get("/chats", {
-        params: {
-          customer: clientInfo.id,
-          channel: 1,
-        },
-      })
-      .then((response) => {
-        setChatData(response.data[0]);
-      });
-  }, [clientInfo.id]);
+    async function getCustomer() {
+      await getChats();
+
+      try {
+        await api
+          .get("/customers", {
+            params: { id: chatData.customer },
+          })
+          .then((response) => {
+            if (response.data) setClientInfo(response.data[0]);
+            else return;
+          });
+      } catch (err) {}
+    }
+
+    getCustomer();
+  }, [channel, chatData, clientInfo.id, id]);
 
   const formatDate = useCallback((timeStamp) => {
     const date = new Date(timeStamp * 1000);
@@ -100,7 +109,7 @@ const CentralChat: React.FC = () => {
       </ContainerFunctionArea>
 
       <ChatContent>
-        {chatData && (
+        {chatData !== undefined ? (
           <>
             {chatData.messages !== undefined ? (
               chatData.messages.map((message) => {
@@ -172,6 +181,8 @@ const CentralChat: React.FC = () => {
               <p>Loading ...</p>
             )}
           </>
+        ) : (
+          <p></p>
         )}
       </ChatContent>
 
