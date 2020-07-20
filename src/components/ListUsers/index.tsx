@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -15,8 +14,6 @@ import plusIcon from "../../assets/plusIcon.svg";
 import lupa from "../../assets/lupa.svg";
 
 import api from "../../services/api";
-
-import ClientToList from "../ClientToList";
 
 interface UserProps {
   name: string;
@@ -43,11 +40,6 @@ const ListUsers: React.FC = () => {
   const [clienteData, setClienteData] = useState<ClientProps[]>([]);
 
   const [chat, setChat] = useState<ChatProps[]>([]);
-  const [count1, setCount1] = useState(0);
-
-  var b = 0;
-
-  // const { id } = useParams();
 
   useEffect(() => {
     api.get<ChatProps[]>("/chats").then((response) => {
