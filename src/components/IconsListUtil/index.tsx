@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import { FiPhoneCall } from "react-icons/fi";
 import { FaWhatsapp, FaRegCalendarAlt, FaRocketchat } from "react-icons/fa";
@@ -19,12 +19,16 @@ const IconsListUtil: React.FC = () => {
   const [channelWpp, setChannelWpp] = useState(0);
   const [channelEmail, setChannelEmail] = useState(0);
 
+  const { id } = useParams();
+
   useEffect(() => {
     let CountWpp = 0;
     let CountEmail = 0;
 
     async function getChat() {
-      const response = await api.get<Props[]>("/chats");
+      const response = await api.get<Props[]>("/chats", {
+        params: { customer: id },
+      });
       response.data.map((chat) => {
         if (chat.channel === 1) {
           CountWpp++;
@@ -41,7 +45,7 @@ const IconsListUtil: React.FC = () => {
     }
 
     getChat();
-  }, []);
+  }, [id]);
 
   return (
     <Container>
@@ -50,7 +54,7 @@ const IconsListUtil: React.FC = () => {
       </button>
       <IconUtil
         id="wpp"
-        to={`/wppchat/1/1`}
+        to={`/wppchat/1/${id}`}
         isActive={(match, location) => location.pathname.includes("wppchat")}
         activeStyle={{
           backgroundColor: "green",
@@ -63,7 +67,7 @@ const IconsListUtil: React.FC = () => {
 
       <IconUtil
         id="email"
-        to="/inbox"
+        to={`/inbox/${id}`}
         isActive={(match, location) => location.pathname.includes("inbox")}
         activeStyle={{
           backgroundColor: "red",

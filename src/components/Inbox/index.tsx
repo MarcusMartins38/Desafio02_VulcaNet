@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 
 import {
@@ -32,17 +32,20 @@ interface MessageProps {
 const Inbox: React.FC = () => {
   const [chatData, setChatData] = useState<ChatProps[]>();
 
+  const { id } = useParams();
+
   useEffect(() => {
     api
       .get("/chats", {
         params: {
+          customer: id,
           channel: 2,
         },
       })
       .then((response) => {
         setChatData(response.data);
       });
-  }, []);
+  }, [id]);
 
   const formatDate = useCallback((timeStamp) => {
     const date = new Date(timeStamp * 1000);
@@ -70,7 +73,7 @@ const Inbox: React.FC = () => {
         </HeadTable>
         {chatData &&
           chatData.map((chat) => (
-            <Link key={chat.id} to={`/inboxchat/2/${chat.id}`}>
+            <Link key={chat.id} to={`/inboxchat/2/${id}/${chat.id}`}>
               <p>{chat.subject}</p>
               <p>{formatDate(chat.start)}</p>
               <p>{formatDate(1594388082)}</p>

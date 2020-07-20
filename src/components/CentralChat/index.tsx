@@ -63,7 +63,7 @@ const CentralChat: React.FC = () => {
       await api
         .get("/chats", {
           params: {
-            id,
+            customer: id,
             channel,
           },
         })
@@ -78,7 +78,7 @@ const CentralChat: React.FC = () => {
       try {
         await api
           .get("/customers", {
-            params: { id: chatData.customer },
+            params: { id },
           })
           .then((response) => {
             if (response.data) setClientInfo(response.data[0]);

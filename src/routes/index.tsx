@@ -11,8 +11,8 @@ const Routes = () => {
     <BrowserRouter>
       <Route component={SignIn} exact path="/" />
       <Route component={Main} path="/wppchat/:channel/:id" />
-      <Route component={InboxChatPage} path="/inboxchat/:channel/:id" />
-      <Route component={InboxPage} path="/inbox" />
+      <Route component={InboxChatPage} path="/inboxchat/:channel/:id/:chatid" />
+      <Route component={InboxPage} path="/inbox/:id" />
     </BrowserRouter>
   );
 };

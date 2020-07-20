@@ -52,7 +52,7 @@ const InboxChat: React.FC = () => {
   const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
   const [userData, setUserData] = useState<UserProps>({} as UserProps);
 
-  const { id } = useParams();
+  const { id, chatid } = useParams();
 
   useEffect(() => {
     api.get("/user").then((response) => {
@@ -70,13 +70,13 @@ const InboxChat: React.FC = () => {
     api
       .get("/chats", {
         params: {
-          id,
+          id: chatid,
         },
       })
       .then((response) => {
         setChatData(response.data[0]);
       });
-  }, [id]);
+  }, [chatid, id]);
 
   const formatDate = useCallback((timeStamp) => {
     const date = new Date(timeStamp * 1000);
