@@ -84,3 +84,59 @@ export const ContentClientList = styled.div`
     display: none;
   }
 `;
+
+export const ClientToListInfo = styled(NavLink)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: background-color 0.5s, padding 0.5s;
+
+  #counter_of_notification {
+    width: 20px;
+    height: 20px;
+
+    background-color: #e33e1a;
+    border: 1px solid white;
+
+    margin-left: 30%;
+    border-radius: 50%;
+
+    p {
+      text-align: center;
+
+      align-self: center;
+
+      font-size: 13px;
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  #info_client {
+    display: flex;
+    align-items: center;
+
+    img {
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+    }
+
+    strong {
+      margin-left: 8px;
+      font-size: 14px;
+    }
+    p {
+      margin-left: 8px;
+      font-size: 12px;
+    }
+  }
+`;

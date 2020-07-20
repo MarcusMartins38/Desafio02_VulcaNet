@@ -8,6 +8,7 @@ import {
   InputArea,
   DivClientes,
   ContentClientList,
+  ClientToListInfo,
 } from "./styles";
 
 import plusIcon from "../../assets/plusIcon.svg";
@@ -66,8 +67,16 @@ const ListUsers: React.FC = () => {
     });
   }, []);
 
-  function zeroOnCount() {
-    b = 0;
+  function handleCount(id: number) {
+    var b = 0;
+
+    chat.map((chatuni) => {
+      if (chatuni.customer === id) {
+        b++;
+      }
+    });
+
+    return b;
   }
 
   return (
@@ -93,27 +102,22 @@ const ListUsers: React.FC = () => {
 
         <ContentClientList>
           {clienteData.map((client) => (
-            <ClientToList
-              key={client.id}
-              to={`/wppchat/1/${client.id}`}
-              onClick={zeroOnCount}
-              conversation={
-                (chat.map((chatuni) => {
-                  if (chatuni.customer === client.id) {
-                    console.log(b);
-                    console.log(client.id + "  id");
-                    return b++;
-                  }
-                }),
-                b)
-              }
-            >
-              <img alt="Perfil" src={client.photo} />
-              <div>
-                <strong>{client.name}</strong>
-                <p>{client.company}</p>
+            <ClientToListInfo key={client.id} to={`/wppchat/1/${client.id}`}>
+              <div id="info_client">
+                <img alt="Perfil" src={client.photo} />
+                <div>
+                  <strong>{client.name}</strong>
+                  <p>{client.company}</p>
+                </div>
               </div>
-            </ClientToList>
+              {handleCount(client.id) > 0 ? (
+                <div id="counter_of_notification">
+                  <p>{handleCount(client.id)}</p>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </ClientToListInfo>
           ))}
         </ContentClientList>
       </Content>
