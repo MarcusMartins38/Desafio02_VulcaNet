@@ -14,7 +14,6 @@ import {
 
 import checkedMessage from "../../assets/checkedMessage.svg";
 import uncheckedMessage from "../../assets/uncheckedMessage.svg";
-import sendingMessageGroup from "../../assets/sendingMessageGroup.svg";
 import lupa from "../../assets/lupa.svg";
 import InboxClip from "../../assets/InboxClip.svg";
 import InboxImage from "../../assets/InboxImage.svg";

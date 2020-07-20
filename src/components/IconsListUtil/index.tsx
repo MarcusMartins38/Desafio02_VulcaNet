@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { FiPhoneCall } from "react-icons/fi";
@@ -7,18 +7,48 @@ import { AiOutlineSkype, AiOutlineMail } from "react-icons/ai";
 
 import { Container } from "./styles";
 
-interface ChannelProps {
+import IconUtil from "../IconUtil";
+import api from "../../services/api";
+
+interface Props {
+  id: number;
   channel: number;
-  type: string;
 }
 
 const IconsListUtil: React.FC = () => {
+  const [channelWpp, setChannelWpp] = useState(0);
+  const [channelEmail, setChannelEmail] = useState(0);
+
+  useEffect(() => {
+    let CountWpp = 0;
+    let CountEmail = 0;
+
+    async function getChat() {
+      const response = await api.get<Props[]>("/chats");
+      response.data.map((chat) => {
+        if (chat.channel === 1) {
+          CountWpp++;
+          return;
+        }
+        if (chat.channel === 2) {
+          CountEmail++;
+          return;
+        } else return;
+      });
+
+      setChannelWpp(CountWpp);
+      setChannelEmail(CountEmail);
+    }
+
+    getChat();
+  }, []);
+
   return (
     <Container>
       <button id="calendar">
         <FaRegCalendarAlt size={30} />
       </button>
-      <NavLink
+      <IconUtil
         id="wpp"
         to={`/wppchat/1/1`}
         isActive={(match, location) => location.pathname.includes("wppchat")}
@@ -26,11 +56,12 @@ const IconsListUtil: React.FC = () => {
           backgroundColor: "green",
           color: "white",
         }}
+        conversation={channelWpp}
       >
         <FaWhatsapp size={30} />
-      </NavLink>
+      </IconUtil>
 
-      <NavLink
+      <IconUtil
         id="email"
         to="/inbox"
         isActive={(match, location) => location.pathname.includes("inbox")}
@@ -38,9 +69,10 @@ const IconsListUtil: React.FC = () => {
           backgroundColor: "red",
           color: "white",
         }}
+        conversation={channelEmail}
       >
         <AiOutlineMail size={30} />
-      </NavLink>
+      </IconUtil>
 
       <button id="skype">
         <AiOutlineSkype size={30} />
