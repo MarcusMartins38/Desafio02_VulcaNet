@@ -97,7 +97,13 @@ export const ClientToListInfo = styled(NavLink)`
   cursor: pointer;
   text-decoration: none;
 
+  border-radius: 24px 0 0 24px;
   transition: background-color 0.5s, padding 0.5s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 8px 0;
+  }
 
   #counter_of_notification {
     width: 20px;
