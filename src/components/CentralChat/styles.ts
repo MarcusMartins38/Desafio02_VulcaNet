@@ -33,6 +33,7 @@ export const ContainerFunctionArea = styled.div`
       background-color: #00a7cf;
 
       font-weight: bold;
+      text-transform: uppercase;
       color: white;
     }
   }
@@ -55,9 +56,12 @@ export const InputArea = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  height: 28px;
+  height: 38px;
+  width: 280px;
   margin-bottom: 8px;
   border: 1px solid gray;
+  margin-left: 20px;
+  margin-top: 5px;
 
   input {
     width: 100%;

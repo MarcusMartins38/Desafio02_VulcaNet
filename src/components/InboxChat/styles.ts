@@ -20,19 +20,41 @@ export const ContainerFunctionArea = styled.div`
   width: 100%;
   background-color: white;
 
-  div {
+  #div_voltar {
+    display: flex;
+    align-items: center;
+
+    button {
+      border: 0;
+      background-color: transparent;
+      margin-left: 20px;
+    }
+
+    h2 {
+      font-size: 18px;
+      line-height: 16px;
+      color: #222222;
+      margin-left: 14px;
+    }
+  }
+
+  #div_button {
     display: flex;
 
     button {
       font-size: 16px;
       margin: 5px;
-      padding: 8px 12px;
+      /* padding: 8px 12px; */
+      width: 234px;
+      height: 38px;
       cursor: pointer;
 
       border: 1px solid gray;
       background-color: #00a7cf;
 
       font-weight: bold;
+      text-transform: uppercase;
+
       color: white;
     }
   }
@@ -46,27 +68,6 @@ export const ChatContent = styled.div`
 
   ::-webkit-scrollbar {
     display: none;
-  }
-`;
-
-export const InputArea = styled.div`
-  background-color: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 5px;
-  height: 28px;
-  margin-bottom: 8px;
-  border: 1px solid gray;
-
-  input {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-  }
-
-  img {
-    margin-right: 8px;
   }
 `;
 

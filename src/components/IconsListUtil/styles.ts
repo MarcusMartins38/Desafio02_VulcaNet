@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   button,
   a {
-    padding: 16px 0;
+    padding: 20px 0;
     width: 100%;
     background-color: transparent;
 

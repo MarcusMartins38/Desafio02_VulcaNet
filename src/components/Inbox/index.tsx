@@ -62,7 +62,7 @@ const Inbox: React.FC = () => {
             <input />
             <img src={lupa} alt="lupa" />
           </InputArea>
-          <button>Finalizar Atendimento</button>
+          <button>Novo Email</button>
         </div>
       </ContainerFunctionArea>
       <EmailsContent>

@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import {
   Container,
   ContainerFunctionArea,
-  InputArea,
   ChatContent,
   ClientMessage,
   UserInfo,
@@ -18,12 +17,13 @@ import lupa from "../../assets/lupa.svg";
 import InboxClip from "../../assets/InboxClip.svg";
 import InboxImage from "../../assets/InboxImage.svg";
 import InboxGroupIcons from "../../assets/InboxGroupIcons.svg";
+import BackArrow from "../../assets/BackArrow.svg";
 
 import { ClientData } from "../../components/ClientInfo";
 
 import { format } from "date-fns";
 import api from "../../services/api";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 interface ChatProps {
   id: number;
@@ -51,6 +51,8 @@ const InboxChat: React.FC = () => {
   const [chatData, setChatData] = useState<ChatProps>({} as ChatProps);
   const [clientInfo, setClientInfo] = useState<ClientData>({} as ClientData);
   const [userData, setUserData] = useState<UserProps>({} as UserProps);
+
+  const history = useHistory();
 
   const { id, chatid } = useParams();
 
@@ -84,14 +86,21 @@ const InboxChat: React.FC = () => {
     return formattedDate;
   }, []);
 
+  const handleBackButton = useCallback(() => {
+    history.push(`/inbox/${id}`);
+  }, [history, id]);
+
   return (
     <Container>
       <ContainerFunctionArea>
-        <InputArea>
-          <input />
-          <img src={lupa} alt="lupa" />
-        </InputArea>
-        <div>
+        <div id="div_voltar">
+          <button onClick={handleBackButton}>
+            <img src={BackArrow} alt="BackArrow" />
+          </button>
+
+          <h2>Procedimento de Troca</h2>
+        </div>
+        <div id="div_button">
           <button>Finalizar Atendimento</button>
         </div>
       </ContainerFunctionArea>

@@ -110,7 +110,7 @@ export const ClientToListInfo = styled(NavLink)`
     height: 20px;
 
     background-color: #e33e1a;
-    border: 1px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
 
     margin-left: 30%;
     border-radius: 50%;

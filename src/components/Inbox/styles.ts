@@ -20,7 +20,7 @@ export const ContainerFunctionArea = styled.div`
   background-color: white;
 
   h2 {
-    margin-left: 8px;
+    margin-left: 20px;
     text-transform: uppercase;
   }
 
@@ -30,14 +30,19 @@ export const ContainerFunctionArea = styled.div`
 
     button {
       font-size: 16px;
-      margin: 5px;
-      padding: 8px 12px;
+      margin-left: 20px;
+      margin-bottom: 5px;
+      /* padding: 8px 12px; */
+      width: 173px;
+      height: 37px;
       cursor: pointer;
 
       border: 1px solid gray;
       background-color: #00a7cf;
 
       font-weight: bold;
+      text-transform: uppercase;
+
       color: white;
     }
   }
@@ -49,7 +54,8 @@ export const InputArea = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  height: 28px;
+  height: 38px;
+  width: 280px;
   margin-bottom: 8px;
   border: 1px solid gray;
 

@@ -8,6 +8,7 @@ position:relative;
 
 &::after {
     background-color: #E33E1A;
+    border: 2px solid rgba(255, 255, 255, 0.6);
     width: auto;
     height: 16px;
     padding: 3px 6px;
