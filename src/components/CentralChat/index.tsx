@@ -72,9 +72,9 @@ const CentralChat: React.FC = () => {
         });
     }
 
-    async function getCustomer() {
-      await getChats();
+    getChats();
 
+    async function getCustomer() {
       try {
         await api
           .get("/customers", {
@@ -88,7 +88,7 @@ const CentralChat: React.FC = () => {
     }
 
     getCustomer();
-  }, [channel, chatData, clientInfo.id, id]);
+  }, [channel, id]);
 
   const formatDate = useCallback((timeStamp) => {
     const date = new Date(timeStamp * 1000);
