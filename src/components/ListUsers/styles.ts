@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const Container = styled.div`
   grid-area: LU;
@@ -81,38 +82,5 @@ export const ContentClientList = styled.div`
 
   ::-webkit-scrollbar {
     display: none;
-  }
-`;
-
-export const ClienteInfo = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 16px;
-  margin-bottom: 16px;
-
-  cursor: pointer;
-
-  transition: background-color 0.5s, padding 0.5s;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 6px 0;
-  }
-
-  img {
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-  }
-
-  div {
-    margin-left: 8px;
-
-    strong {
-      font-size: 14px;
-    }
-    p {
-      font-size: 12px;
-    }
   }
 `;

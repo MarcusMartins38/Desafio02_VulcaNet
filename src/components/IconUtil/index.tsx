@@ -1,9 +1,5 @@
-import React, { useEffect } from "react";
-import { NavLink, NavLinkProps } from "react-router-dom";
-
-import { FiPhoneCall } from "react-icons/fi";
-import { FaWhatsapp, FaRegCalendarAlt, FaRocketchat } from "react-icons/fa";
-import { AiOutlineSkype, AiOutlineMail } from "react-icons/ai";
+import React from "react";
+import { NavLinkProps } from "react-router-dom";
 
 import { Link } from "./styles";
 
@@ -16,9 +12,6 @@ const IconUtil: React.FC<IconProps> = ({
   children,
   ...props
 }) => {
-  useEffect(() => {
-    console.log({ ...props });
-  }, [props]);
   return (
     <Link {...props} conversation={conversation}>
       {children}

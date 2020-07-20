@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { NavLink, useParams } from "react-router-dom";
 
 import {
   Container,
@@ -7,14 +8,14 @@ import {
   InputArea,
   DivClientes,
   ContentClientList,
-  ClienteInfo,
 } from "./styles";
 
 import plusIcon from "../../assets/plusIcon.svg";
 import lupa from "../../assets/lupa.svg";
 
 import api from "../../services/api";
-import { useHistory } from "react-router-dom";
+
+import ClientToList from "../ClientToList";
 
 interface UserProps {
   name: string;
@@ -29,11 +30,29 @@ interface ClientProps {
   company: string;
 }
 
+interface ChatProps {
+  id: number;
+  customer: number;
+  channel: number;
+  subject: string | null;
+  start: number;
+}
 const ListUsers: React.FC = () => {
   const [userData, setUserData] = useState<UserProps>({} as UserProps);
   const [clienteData, setClienteData] = useState<ClientProps[]>([]);
 
-  const history = useHistory();
+  const [chat, setChat] = useState<ChatProps[]>([]);
+  const [count1, setCount1] = useState(0);
+
+  var b = 0;
+
+  // const { id } = useParams();
+
+  useEffect(() => {
+    api.get<ChatProps[]>("/chats").then((response) => {
+      setChat(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     api.get("/user").then((response) => {
@@ -47,12 +66,9 @@ const ListUsers: React.FC = () => {
     });
   }, []);
 
-  const handleClick = useCallback(
-    (id) => {
-      history.push(`/wppchat/1/${id}`);
-    },
-    [history]
-  );
+  function zeroOnCount() {
+    b = 0;
+  }
 
   return (
     <Container>
@@ -77,13 +93,27 @@ const ListUsers: React.FC = () => {
 
         <ContentClientList>
           {clienteData.map((client) => (
-            <ClienteInfo key={client.id} onClick={() => handleClick(client.id)}>
+            <ClientToList
+              key={client.id}
+              to={`/wppchat/1/${client.id}`}
+              onClick={zeroOnCount}
+              conversation={
+                (chat.map((chatuni) => {
+                  if (chatuni.customer === client.id) {
+                    console.log(b);
+                    console.log(client.id + "  id");
+                    return b++;
+                  }
+                }),
+                b)
+              }
+            >
               <img alt="Perfil" src={client.photo} />
               <div>
                 <strong>{client.name}</strong>
                 <p>{client.company}</p>
               </div>
-            </ClienteInfo>
+            </ClientToList>
           ))}
         </ContentClientList>
       </Content>
